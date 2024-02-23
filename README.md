@@ -1,0 +1,1 @@
+# Minichess5x6
