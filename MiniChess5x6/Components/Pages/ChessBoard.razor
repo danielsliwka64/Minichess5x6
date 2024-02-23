@@ -1,0 +1,48 @@
+﻿@using MiniChessLogic.Pieces
+@using MiniChessLogic
+@rendermode InteractiveServer
+
+<h3>ChessBoard</h3>
+@for (int i = 0; i < 6; i++)
+{
+    <div class="row">
+    @for (int j = 0; j < 5; j++)
+    {
+            var piece = gameState.Board[i, j];
+
+            @* bool canMoveHeare = false;
+            if(activePiece != null)
+            {
+                int row = activePiece.Row + (1);
+            } *@
+           
+
+            <div class="cell" >
+                @if(piece != null)
+                {
+                    <div class="piece @piece.Color @piece.Type @(activePiece == piece ? "active": "")" 
+                        @onclick="()=> {activePiece = piece;}"></div>
+                }
+            </div>
+    }
+    </div>
+}
+@code {
+    private GameState gameState;
+    private Piece activePiece = null;
+    protected override void OnInitialized()
+    {
+        gameState = new GameState(Player.White, Board.Initial());
+    }
+    private void DrawBoard(Board board)
+    {
+        for (int r = 0; r < 8; r++)
+        {
+            for (int c = 0; c < 8; c++)
+            {
+                Piece piece = board[r, c];
+            }
+        }
+    }
+}
+
