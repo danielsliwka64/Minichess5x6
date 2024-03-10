@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MiniChessLogic.Moves;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,28 @@ namespace MiniChessLogic.Pieces
         public King(Player color)
         {
             Color = color;
+        }
+        public override IEnumerable<Move> GetMoves(Position from, Board board)
+        {
+            foreach (Position to in MovePositions(from, board))
+            {
+                yield return new NormalMove(from, to);
+            }
+        }
+        private IEnumerable<Position> MovePositions(Position from, Board board)
+        {
+            foreach (Direction dir in dirs)
+            {
+                Position to = from + dir;
+                if (!Board.IsInside(to))
+                {
+                    continue;
+                }
+                if (board.IsEmpty(to) || board[to].Color != Color)
+                {
+                    yield return to;
+                }
+            }
         }
     }
 }

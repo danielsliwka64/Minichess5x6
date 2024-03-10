@@ -1,23 +1,23 @@
 ﻿@using MiniChessLogic.Pieces
+@using MiniChessLogic.Moves
 @using MiniChessLogic
+@using System.Drawing
 @rendermode InteractiveServer
 
 <h3>ChessBoard</h3>
+<div class="BoardGrid">
+
+
 @for (int i = 0; i < 6; i++)
 {
+    int localI = i;
     <div class="row">
     @for (int j = 0; j < 5; j++)
     {
-            var piece = gameState.Board[i, j];
+           int localJ = j;
+           var piece = gameState.Board[i, j]; 
 
-            @* bool canMoveHeare = false;
-            if(activePiece != null)
-            {
-                int row = activePiece.Row + (1);
-            } *@
-           
-
-            <div class="cell" >
+            <div class="cell" @onclick="() => Board_MouseDown(localI, localJ)">
                 @if(piece != null)
                 {
                     <div class="piece @piece.Color @piece.Type @(activePiece == piece ? "active": "")" 
@@ -27,22 +27,75 @@
     }
     </div>
 }
+</div>
 @code {
+
     private GameState gameState;
     private Piece activePiece = null;
+    private Position selectedPos = null;
+    private readonly Dictionary<Position, Move> moveCache = new Dictionary<Position, Move>();
+    //private readonly Rectangle[,] highlights = new Rectangle[6, 5];
+
     protected override void OnInitialized()
     {
         gameState = new GameState(Player.White, Board.Initial());
     }
     private void DrawBoard(Board board)
     {
-        for (int r = 0; r < 8; r++)
+        for (int r = 0; r < 6; r++)
         {
-            for (int c = 0; c < 8; c++)
+            for (int c = 0; c < 5; c++)
             {
                 Piece piece = board[r, c];
             }
         }
     }
+    private void OnFromPositionSelected(Position pos)
+    {
+        IEnumerable<Move> moves = gameState.LegalMoveForPiece(pos);
+        if (moves.Any())
+        {
+            selectedPos = pos;
+            //ShowHighlights();
+        }
+    }
+    private void OnToPositionSelected(Position pos)
+    {
+        selectedPos = null;
+        //HideHighlights();
+        if (moveCache.TryGetValue(pos, out Move move))
+        {
+            HandleMove(move);
+        }
+    }
+    private void HandleMove(Move move)
+    {   
+        DrawBoard(gameState.Board);
+    }
+    private void Board_MouseDown(int col, int row)
+    {
+        if (activePiece == null)
+        {
+            return;
+        }
+        
+        Position pos = GetCoordinates(col, row);
+
+        if (selectedPos == null)
+        {
+            OnFromPositionSelected(pos);
+        }
+        else
+        {
+            OnToPositionSelected(pos);
+        }
+
+    }
+    private Position GetCoordinates(int x, int y)
+    {
+        
+        return new Position(x, y);
+    }
+    
 }
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MiniChessLogic.Moves;
+using MiniChessLogic.Pieces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +17,17 @@ namespace MiniChessLogic
             CurrentPlayer = player;
             Board = board;
         }
+        public IEnumerable<Move> LegalMoveForPiece(Position pos)
+        {
+            if (Board.IsEmpty(pos) || Board[pos].Color != CurrentPlayer)
+            {
+                return Enumerable.Empty<Move>();
+            }
+
+            Piece piece = Board[pos];
+            IEnumerable<Move> moveCandidates = piece.GetMoves(pos, Board);
+            return moveCandidates;
+        }
+       
     }
 }
