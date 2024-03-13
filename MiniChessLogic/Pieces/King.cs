@@ -49,5 +49,11 @@ namespace MiniChessLogic.Pieces
                 }
             }
         }
+        public override Piece Copy()
+        {
+            King copy = new King(Color);
+            copy.HasMoved = HasMoved;
+            return copy;
+        }
     }
 }
