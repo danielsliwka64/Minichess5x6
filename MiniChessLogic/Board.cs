@@ -1,10 +1,4 @@
 ﻿using MiniChessLogic.Pieces;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MiniChessLogic
 {
@@ -30,29 +24,23 @@ namespace MiniChessLogic
         }
         private void AddStartPieces()
         {
-            //this[0, 0] = new Rook(Player.Black);
-            //this[0, 1] = new Knight(Player.Black);
-            //this[0, 2] = new Bishop(Player.Black);
-            //this[0, 3] = new Queen(Player.Black);
+            this[0, 0] = new Rook(Player.Black);
+            this[0, 1] = new Knight(Player.Black);
+            this[0, 2] = new Bishop(Player.Black);
+            this[0, 3] = new Queen(Player.Black);
             this[0, 4] = new King(Player.Black);
-            //this[0, 5] = new Bishop(Player.Black);
-            //this[0, 6] = new Knight(Player.Black);
-            //this[0, 7] = new Rook(Player.Black);
 
-            //this[7, 0] = new Rook(Player.White);
-            //this[7, 1] = new Knight(Player.White);
-            //this[7, 2] = new Bishop(Player.White);
-            //this[7, 3] = new Queen(Player.White);
+            this[5, 0] = new Rook(Player.White);
+            this[5, 1] = new Knight(Player.White);
+            this[5, 2] = new Bishop(Player.White);
+            this[5, 3] = new Queen(Player.White);
             this[5, 4] = new King(Player.White);
-            //this[7, 5] = new Bishop(Player.White);
-            //this[7, 6] = new Knight(Player.White);
-            //this[7, 7] = new Rook(Player.White);
 
-            //for (int c = 0; c < 8; c++)
-            //{
-            //    this[1, c] = new Pawn(Player.Black);
-            //    this[6, c] = new Pawn(Player.White);
-            //}
+            for (int c = 0; c < 4; c++)
+            {
+                this[1, c] = new Pawn(Player.Black);
+                this[4, c] = new Pawn(Player.White);
+            }
         }
         public static bool IsInside(Position pos)
         {

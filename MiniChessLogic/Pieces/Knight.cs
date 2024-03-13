@@ -1,8 +1,6 @@
-﻿using MiniChessLogic;
-using MiniChessLogic.Moves;
-using MiniChessLogic.Pieces;
+﻿using MiniChessLogic.Moves;
 
-namespace ChessLogic
+namespace MiniChessLogic.Pieces
 {
     public class Knight : Piece
     {

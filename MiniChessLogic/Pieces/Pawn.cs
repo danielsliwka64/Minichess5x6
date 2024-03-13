@@ -1,8 +1,6 @@
-﻿using MiniChessLogic;
-using MiniChessLogic.Moves;
-using MiniChessLogic.Pieces;
+﻿using MiniChessLogic.Moves;
 
-namespace ChessLogic
+namespace MiniChessLogic.Pieces
 {
     public class Pawn : Piece
     {
@@ -106,16 +104,16 @@ namespace ChessLogic
         //}
         public override IEnumerable<Move> GetMoves(Position from, Board board)
         {
-            return ForwardMoves(from, board).Concat(DiagonalMoves(from, board));
+            return ForwardMoves(from, board);//.Concat(DiagonalMoves(from, board));
         }
 
-        public override bool CanCaptureOpponentKing(Position from, Board board)
-        {
-            return DiagonalMoves(from, board).Any(move =>
-            {
-                Piece piece = board[move.ToPos];
-                return piece != null && piece.Type == PieceType.King;
-            });
-        }
+        //public override bool CanCaptureOpponentKing(Position from, Board board)
+        //{
+        //    return DiagonalMoves(from, board).Any(move =>
+        //    {
+        //        Piece piece = board[move.ToPos];
+        //        return piece != null && piece.Type == PieceType.King;
+        //    });
+        //}
     }
 }
