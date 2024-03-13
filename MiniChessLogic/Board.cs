@@ -36,7 +36,7 @@ namespace MiniChessLogic
             this[5, 3] = new Queen(Player.White);
             this[5, 4] = new King(Player.White);
 
-            for (int c = 0; c < 4; c++)
+            for (int c = 0; c < 5; c++)
             {
                 this[1, c] = new Pawn(Player.Black);
                 this[4, c] = new Pawn(Player.White);
