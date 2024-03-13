@@ -16,16 +16,18 @@
     <div class="row">
     @for (int j = 0; j < 5; j++)
     {
-           int localJ = j;
-           var piece = gameState.Board[i, j]; 
-
-            <div class="cell" @onclick="() => Board_MouseDown(localI, localJ)">
-                    @if (piece != null)
-                    {
-                        <div class="piece @piece.Color @piece.Type @(activePiece == piece ? "active": "")"
-                             @onclick="()=> {activePiece = piece;}"></div>
-                    }
-            </div>
+        int localJ = j;
+        var piece = gameState.Board[i, j];
+        
+        <div class="cell @(highlights[i,j] == true? "active":"")" 
+            @onclick="() => Board_MouseDown(localI, localJ) ">
+            @if (piece != null)
+            {
+                <div class="piece @piece.Color @piece.Type @(activePiece == piece ? "active": "")"
+                    @onclick="()=> {activePiece = piece;}">
+                </div>
+            }
+        </div>
     }
     </div>
 }
@@ -36,8 +38,7 @@
     private Piece? activePiece = null;
     private Position? selectedPos = null;
     private readonly Dictionary<Position, Move> moveCache = new Dictionary<Position, Move>();
-    //private readonly Image[,] pieceImages = new Image[8, 8];
-    //private readonly Rectangle[,] highlights = new Rectangle[6, 5];
+    private readonly bool[,] highlights = new bool[6, 5];
 
     protected override void OnInitialized()
     {
@@ -51,6 +52,7 @@
             for (int c = 0; c < 5; c++)
             {
                 Piece piece = board[r, c];
+
             }
         }
     }
@@ -60,13 +62,14 @@
         if (moves.Any())
         {
             selectedPos = pos;
-            //ShowHighlights();
+            CacheMoves(moves);
+            ShowHighlights();
         }
     }
     private void OnToPositionSelected(Position pos)
     {
         selectedPos = null;
-        //HideHighlights();
+        HideHighlights();
         if (moveCache.TryGetValue(pos, out Move move))
         {
             HandleMove(move);
@@ -82,7 +85,7 @@
         {
             return;
         }
-        
+
         Position pos = GetCoordinates(col, row);
 
         if (selectedPos == null)
@@ -97,9 +100,30 @@
     }
     private Position GetCoordinates(int x, int y)
     {
-        
+
         return new Position(x, y);
     }
-    
+    private void CacheMoves(IEnumerable<Move> moves)
+    {
+        moveCache.Clear();
+
+        foreach (Move move in moves)
+        {
+            moveCache[move.ToPos] = move;
+        }
+    }
+    private void ShowHighlights()
+    {
+        foreach (Position to in moveCache.Keys)
+        {
+            highlights[to.Row, to.Column] = true;
+        }
+    }
+    private void HideHighlights(){
+        foreach (Position to in moveCache.Keys)
+        {
+            highlights[to.Row, to.Column] = false;
+        }
+    }
 }
 

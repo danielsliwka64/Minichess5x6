@@ -1,23 +1,34 @@
 ﻿.row{
 
 }
-.cell{
+.cell {
     height: 80px;
     width: 80px;
     padding: 2px;
     border: 1px solid black;
 }
+.cell.active{
+    border: 3px solid blue;
+}
 .row:nth-child(2n+1) .cell:nth-child(2n+1) {
     background: gray;
 }
 .row:nth-child(2n+1) .cell:nth-child(2n) {
-    background: #ffffff;
+    background: #fffff2;
 }
 .row:nth-child(2n) .cell:nth-child(2n+1) {
-    background: #ffffff;
+    background: #fffff2;
     
 }
 .row:nth-child(2n) .cell:nth-child(2n) {
     background: gray;
 }
-
+.highlight {
+    height: 40px;
+    width: 40px;
+    left: 23%;
+    top: 23%;
+    position: relative;
+    border-radius: 50%;
+    background-color: #000000ce
+}
