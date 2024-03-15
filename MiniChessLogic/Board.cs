@@ -68,9 +68,9 @@ namespace MiniChessLogic
         }
         public IEnumerable<Position> PiecePositions()
         {
-            for (int r = 0; r < 8; r++)
+            for (int r = 0; r < 6; r++)
             {
-                for (int c = 0; c < 8; c++)
+                for (int c = 0; c < 5; c++)
                 {
                     Position pos = new Position(r, c);
                     if (!IsEmpty(pos)) yield return pos;
@@ -171,21 +171,22 @@ namespace MiniChessLogic
                 !king.HasMoved && !rook.HasMoved;
         }
 
-        public bool CastleRightKS(Player player)
-        {
-            return player switch
-            {
-                Player.White => IsUnmovedKingAndRook(new Position(7, 4), new Position(7, 7)),
-                Player.Black => IsUnmovedKingAndRook(new Position(0, 4), new Position(0, 7)),
-                _ => false
+        //There is no King Side
+        //public bool CastleRightKS(Player player)
+        //{
+        //    return player switch
+        //    {
+        //        Player.White => IsUnmovedKingAndRook(new Position(7, 4), new Position(7, 7)),
+        //        Player.Black => IsUnmovedKingAndRook(new Position(0, 4), new Position(0, 7)),
+        //        _ => false
 
-            };
-        }
+        //    };
+        //}
         public bool CastleRightQS(Player player)
         {
             return player switch
             {
-                Player.White => IsUnmovedKingAndRook(new Position(7, 4), new Position(7, 0)),
+                Player.White => IsUnmovedKingAndRook(new Position(5, 4), new Position(5, 0)),
                 Player.Black => IsUnmovedKingAndRook(new Position(0, 4), new Position(0, 0)),
                 _ => false
 

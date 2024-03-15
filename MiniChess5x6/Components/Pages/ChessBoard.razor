@@ -34,28 +34,17 @@
 </div>
 @code {
 
-    private GameState? gameState;
-    private Piece? activePiece = null;
-    private Position? selectedPos = null;
+    private GameState gameState;
+    private Piece activePiece = null;
+    private Position selectedPos = null;
     private readonly Dictionary<Position, Move> moveCache = new Dictionary<Position, Move>();
     private readonly bool[,] highlights = new bool[6, 5];
 
     protected override void OnInitialized()
     {
         gameState = new GameState(Player.White, Board.Initial());
-        //DrawBoard(gameState.Board);
     }
-    // private void DrawBoard(Board board)
-    // {
-    //     for (int r = 0; r < 6; r++)
-    //     {
-    //         for (int c = 0; c < 5; c++)
-    //         {
-    //             Piece piece = board[r, c];
-
-    //         }
-    //     }
-    // }
+   
     private void OnFromPositionSelected(Position pos)
     {
         IEnumerable<Move> moves = gameState.LegalMoveForPiece(pos);

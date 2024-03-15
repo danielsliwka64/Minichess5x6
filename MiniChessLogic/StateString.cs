@@ -55,7 +55,7 @@ namespace MiniChessLogic
         private void AddRowData(Board board, int row)
         {
             int empty = 0;
-            for (int c = 0; c < 8; c++)
+            for (int c = 0; c < 5; c++)
             {
                 if (board[row, c] == null)
                 {
@@ -81,7 +81,7 @@ namespace MiniChessLogic
 
         private void AddPiecePlacement(Board board)
         {
-            for (int r = 0; r < 8; r++)
+            for (int r = 0; r < 6; r++)
             {
                 if (r != 0)
                 {
@@ -107,29 +107,29 @@ namespace MiniChessLogic
 
         private void AddCastlingRights(Board board)
         {
-            bool castleWKS = board.CastleRightKS(Player.White);
+            //bool castleWKS = board.CastleRightKS(Player.White);
             bool castleWQS = board.CastleRightQS(Player.White);
-            bool castleBKS = board.CastleRightKS(Player.Black);
+            //bool castleBKS = board.CastleRightKS(Player.Black);
             bool castleBQS = board.CastleRightQS(Player.Black);
 
-            if (!(castleWKS || castleWQS || castleBKS || castleBQS))
+            if (!(castleWQS || castleBQS)) //castleWKS || castleBKS
             {
                 sb.Append('-');
                 return;
             }
 
-            if (castleWKS)
-            {
-                sb.Append('K');
-            }
+            //if (castleWKS)
+            //{
+            //    sb.Append('K');
+            //}
             if (castleWQS)
             {
                 sb.Append('Q');
             }
-            if (castleBKS)
-            {
-                sb.Append('k');
-            }
+            //if (castleBKS)
+            //{
+            //    sb.Append('k');
+            //}
             if (castleBQS)
             {
                 sb.Append('q');
@@ -146,7 +146,7 @@ namespace MiniChessLogic
 
             Position pos = board.GetPawnSkipPosition(currentPlayer.Opponent());
             char file = (char)('a' + pos.Column);
-            int rank = 8 - pos.Row;
+            int rank = 6 - pos.Row;
             sb.Append(file);
             sb.Append(rank);
 
