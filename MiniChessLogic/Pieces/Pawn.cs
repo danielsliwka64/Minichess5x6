@@ -67,9 +67,10 @@ namespace MiniChessLogic.Pieces
                     yield return new NormalMove(from, oneMovePosition);
                 }
 
-                
+                // Firts double pawn move
+
                 //Position twoMovePos = oneMovePosition + forward;
-                //if(!HasMoved && CanMoveTo(twoMovePos, board))
+                //if (!HasMoved && CanMoveTo(twoMovePos, board))
                 //{
                 //    yield return new DoublePawn(from, twoMovePos);
                 //}
