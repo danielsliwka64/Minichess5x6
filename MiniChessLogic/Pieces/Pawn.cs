@@ -54,7 +54,7 @@ namespace MiniChessLogic.Pieces
             Position oneMovePosition = from + forward;
             if(CanMoveTo(oneMovePosition, board))
             {
-                if(oneMovePosition.Row == 0|| oneMovePosition.Row == 7)
+                if(oneMovePosition.Row == 0|| oneMovePosition.Row == 5)
                 {
                     foreach (Move promMove in PromotionMoves(from, oneMovePosition))
                     {
@@ -86,7 +86,7 @@ namespace MiniChessLogic.Pieces
                 }
                 else if (CanCaptureAt(to, board))
                 {
-                    if (to.Row == 0 || to.Row == 7)
+                    if (to.Row == 0 || to.Row == 5)
                     {
                         foreach (Move promMove in PromotionMoves(from, to))
                         {
@@ -107,13 +107,13 @@ namespace MiniChessLogic.Pieces
             return ForwardMoves(from, board).Concat(DiagonalMoves(from, board));
         }
 
-        //public override bool CanCaptureOpponentKing(Position from, Board board)
-        //{
-        //    return DiagonalMoves(from, board).Any(move =>
-        //    {
-        //        Piece piece = board[move.ToPos];
-        //        return piece != null && piece.Type == PieceType.King;
-        //    });
-        //}
+        public override bool CanCaptureOpponentKing(Position from, Board board)
+        {
+            return DiagonalMoves(from, board).Any(move =>
+            {
+                Piece piece = board[move.ToPos];
+                return piece != null && piece.Type == PieceType.King;
+            });
+        }
     }
 }
