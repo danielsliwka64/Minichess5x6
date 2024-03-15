@@ -56,10 +56,10 @@ namespace MiniChessLogic.Pieces
             {
                 if(oneMovePosition.Row == 0|| oneMovePosition.Row == 7)
                 {
-                    //foreach(Move promMove in PromotionMoves(from, oneMovePosition))
-                    //{
-                    //    yield return promMove;
-                    //}
+                    foreach (Move promMove in PromotionMoves(from, oneMovePosition))
+                    {
+                        yield return promMove;
+                    }
 
                 }
                 else
