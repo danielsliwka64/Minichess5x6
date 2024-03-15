@@ -43,19 +43,19 @@
     protected override void OnInitialized()
     {
         gameState = new GameState(Player.White, Board.Initial());
-        DrawBoard(gameState.Board);
+        //DrawBoard(gameState.Board);
     }
-    private void DrawBoard(Board board)
-    {
-        for (int r = 0; r < 6; r++)
-        {
-            for (int c = 0; c < 5; c++)
-            {
-                Piece piece = board[r, c];
+    // private void DrawBoard(Board board)
+    // {
+    //     for (int r = 0; r < 6; r++)
+    //     {
+    //         for (int c = 0; c < 5; c++)
+    //         {
+    //             Piece piece = board[r, c];
 
-            }
-        }
-    }
+    //         }
+    //     }
+    // }
     private void OnFromPositionSelected(Position pos)
     {
         IEnumerable<Move> moves = gameState.LegalMoveForPiece(pos);
