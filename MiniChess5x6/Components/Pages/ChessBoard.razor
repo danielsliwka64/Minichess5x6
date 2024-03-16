@@ -6,34 +6,40 @@
 
 @rendermode InteractiveServer
 
-<h3>ChessBoard</h3>
-<div class="BoardGrid">
-
-
-@for (int i = 0; i < 6; i++)
-{
-    int localI = i;
-    <div class="row">
-    @for (int j = 0; j < 5; j++)
+<h3>MiniChess 5x6 by Daniel v1.0</h3>
+<div>
+    @if (gameOver == true)
     {
-        int localJ = j;
-        var piece = gameState.Board[i, j];
+        <div class="gameOver">Game Over!!!</div>
+    }
+    <div class="BoardGrid">
+
+
+    @for (int i = 0; i < 6; i++)
+    {
+        int localI = i;
+        <div class="row">
+        @for (int j = 0; j < 5; j++)
+        {
+            int localJ = j;
+            var piece = gameState.Board[i, j];
         
-        <div class="cell @(highlights[i,j] == true? "active":"")" 
-            @onclick="() => Board_MouseDown(localI, localJ) ">
-            @if (piece != null)
-            {
-                <div class="piece @piece.Color @piece.Type @(activePiece == piece ? "active": "")"
-                    @onclick="()=> {activePiece = piece;}">
-                </div>
-            }
+            <div class="cell @(highlights[i,j] == true? "active":"")" 
+                @onclick="() => Board_MouseDown(localI, localJ) ">
+                @if (piece != null )
+                {
+                    <div class="piece @piece.Color @piece.Type @(activePiece == piece && gameOver == false ? "active": "")"
+                        @onclick="()=> {activePiece = piece;}">
+                    </div>
+                }
+            </div>
+        }
         </div>
     }
     </div>
-}
 </div>
 @code {
-
+    private bool gameOver = false;
     private GameState gameState;
     private Piece activePiece = null;
     private Position selectedPos = null;
@@ -43,8 +49,9 @@
     protected override void OnInitialized()
     {
         gameState = new GameState(Player.White, Board.Initial());
+        gameOver = false;
     }
-   
+
     private void OnFromPositionSelected(Position pos)
     {
         IEnumerable<Move> moves = gameState.LegalMoveForPiece(pos);
@@ -67,6 +74,14 @@
     private void HandleMove(Move move)
     {   
         gameState.MakeMove(move);
+        if (gameState.IsGameOver())
+        {
+            ShowGameOver();
+        }
+    }
+    private void ShowGameOver()
+    {
+        gameOver = true;
     }
     private void Board_MouseDown(int col, int row)
     {
