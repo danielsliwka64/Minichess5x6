@@ -111,6 +111,7 @@ namespace MiniChessLogic
             {
                 stateHistory[stateString]++;
             }
+            Console.WriteLine($"StateString: {stateString}");
         }
 
         private bool ThreefoldRepetition()

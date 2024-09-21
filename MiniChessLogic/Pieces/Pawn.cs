@@ -1,4 +1,5 @@
 ﻿using MiniChessLogic.Moves;
+using MiniChessLogic.Moves;
 
 namespace MiniChessLogic.Pieces
 {

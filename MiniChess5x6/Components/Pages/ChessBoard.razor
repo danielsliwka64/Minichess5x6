@@ -6,12 +6,10 @@
 
 @rendermode InteractiveServer
 
-<h3>MiniChess 5x6 by Daniel v1.0</h3>
-<div>
-    @if (gameOver == true)
-    {
-        <div class="gameOver">Game Over!!!</div>
-    }
+
+<div class="mainPageContent">
+   <div class="boardAndGameOver">
+    
     <div class="BoardGrid">
 
 
@@ -37,10 +35,24 @@
         </div>
     }
     </div>
+        @if (gameOver == true)
+        {
+            <div class="gameOver">
+                <div class="gameOverText">Game Over</div>
+                <div class="gameOverWho">@whoWins</div>
+                <div class="gameOverReason">@howWins</div>
+            </div>
+        }
+    </div>
+    <h3 class="header">MiniChess 5x6 by Daniel, v1.0</h3>
 </div>
+
 @code {
     private bool gameOver = false;
+    private string whoWins;
+    private string howWins;
     private GameState gameState;
+    private Result result;
     private Piece activePiece = null;
     private Position selectedPos = null;
     private readonly Dictionary<Position, Move> moveCache = new Dictionary<Position, Move>();
@@ -82,6 +94,9 @@
     private void ShowGameOver()
     {
         gameOver = true;
+        result = gameState.Result;
+        whoWins = GetWinnerText(result.Winner);
+        howWins = GetReasonText(result.Reason, gameState.CurrentPlayer);
     }
     private void Board_MouseDown(int col, int row)
     {
@@ -129,6 +144,37 @@
         {
             highlights[to.Row, to.Column] = false;
         }
+    }
+    private static string GetWinnerText(Player winner)
+    {
+        return winner switch
+        {
+            Player.White => "WHITE WINS!",
+            Player.Black => "BLACK WINS!",
+            _ => "IT'S A DRAW"
+
+        };
+    }
+    private static string GetReasonText(EndReason reason, Player currentPlayer)
+    {
+        return reason switch
+        {
+            EndReason.Stalemate => $"STALEMATE - {PlayerString(currentPlayer)} CANT't MOVE",
+            EndReason.Chekmate => $"CHECKMATE - {PlayerString(currentPlayer)} CAN'T MOVE",
+            EndReason.FiftyMoveRule => $"FIFTY-MOVE RULE",
+            EndReason.InsufficientMaterial => $"INSUFFICIENT MATERIAL",
+            EndReason.ThreefoldRepetition => $"THREEFOLD REPETITION",
+            _ => ""
+        };
+    }
+    private static string PlayerString(Player player)
+    {
+        return player switch
+        {
+            Player.White => "WHITE",
+            Player.Black => "BLACK",
+            _ => ""
+        };
     }
 }
 

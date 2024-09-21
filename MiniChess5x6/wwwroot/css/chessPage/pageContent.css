@@ -1,0 +1,50 @@
+﻿.mainPageContent {
+    display: block;
+    align-items: center;
+    justify-content: center;
+}
+.boardAndGameOver {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.BoardGrid {
+    margin: 0 40px 0 0;
+}
+.header {
+    color: #7c795d;
+    font-style: italic;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+    margin: 10px 0;
+}
+.gameOver {
+    border: 5px outset red;
+    border-radius: 15px;
+    background-color: lightcoral;
+    text-align: center;
+    margin: 20px 0;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    width: 390px;
+    height: 170px;
+   
+}
+.gameOverText {
+    margin:12px;
+    font-size: 30px;
+    font-weight: 800;
+}
+.gameOverWho {
+    margin: 5px;
+    font-size: 20px;
+    font-weight: 600;
+}
+.gameOverReason {
+    margin: 5px;
+    font-size: 20px;
+    font-weight: 500;
+}
