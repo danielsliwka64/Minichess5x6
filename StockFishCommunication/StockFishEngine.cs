@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace StockFishCommunication
 {
@@ -9,15 +10,29 @@ namespace StockFishCommunication
         public StockFishEngine()
         {
             stockfish = new Process();
-            stockfish.StartInfo.FileName = @"D:\Projects\MiniChess5x6_C#_Blazor_WebApp\stockfish\stockfish-windows-x86-64-sse41-popcnt.exe";
+            stockfish.StartInfo.FileName = @"D:\Projects\MiniChess5x6_C#_Blazor_WebApp\fairy-stockfish\fairy-stockfish-largeboard_x86-64.exe";
             stockfish.StartInfo.UseShellExecute = false;
             stockfish.StartInfo.RedirectStandardInput = true;
             stockfish.StartInfo.RedirectStandardOutput = true;
             stockfish.StartInfo.CreateNoWindow = true;
 
             stockfish.Start();
+            SendCommand("uci");
+            SendCommand("setoption name UCI_Variant value gardner");
+            SendCommand("isready");
+            WaitForReady();
         }
-
+        private void WaitForReady()
+        {
+            string output;
+            while ((output = ReadOutput()) != null)
+            {
+                if (output == "readyok")
+                {
+                    break;
+                }
+            }
+        }
         public void SendCommand(string command)
         {
             if (!stockfish.HasExited)

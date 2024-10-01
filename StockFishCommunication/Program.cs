@@ -3,7 +3,7 @@
     public class Program
     {
         public static string bestMove;
-        public static string examplePosition = "2r1k/pN2p/1p3/4P/PB3/R2K1 w - -";
+        public static string examplePosition = "rnbqk/ppppp/5/5/PPPPP/RNBQK w KQkq - 0 1";
         //r1bqkb1r/pppppppp/2n2n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3"; // Przykładowa pozycja 
         public static async Task OnInitializedAsync()
         {
@@ -11,6 +11,7 @@
             {
                 string currentFen = examplePosition;
                 bestMove = stockfish.GetBestMove(currentFen);
+            
             }
         }
 
