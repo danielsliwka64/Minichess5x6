@@ -10,7 +10,7 @@ namespace StockFishCommunication
         public StockFishEngine()
         {
             stockfish = new Process();
-            stockfish.StartInfo.FileName = @"D:\Projects\MiniChess5x6_C#_Blazor_WebApp\fairy-stockfish\fairy-stockfish-largeboard_x86-64.exe";
+            stockfish.StartInfo.FileName = @"D:\Projects\MiniChess5x5_C#_Blazor_WebApp\fairy-stockfish\fairy-stockfish-largeboard_x86-64.exe";
             stockfish.StartInfo.UseShellExecute = false;
             stockfish.StartInfo.RedirectStandardInput = true;
             stockfish.StartInfo.RedirectStandardOutput = true;

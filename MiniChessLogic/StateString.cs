@@ -23,6 +23,8 @@ namespace MiniChessLogic
             sb.Append(' ');
             //Add en passant data
             AddEnPassant(board, currentPlayer);
+            sb.Append(' ');
+
 
         }
 
@@ -81,7 +83,7 @@ namespace MiniChessLogic
 
         private void AddPiecePlacement(Board board)
         {
-            for (int r = 0; r < 6; r++)
+            for (int r = 0; r < 5; r++)
             {
                 if (r != 0)
                 {
@@ -146,10 +148,15 @@ namespace MiniChessLogic
 
             Position pos = board.GetPawnSkipPosition(currentPlayer.Opponent());
             char file = (char)('a' + pos.Column);
-            int rank = 6 - pos.Row;
+            int rank = 5 - pos.Row;
             sb.Append(file);
             sb.Append(rank);
 
+        }
+
+        private void AddCounting()
+        {
+            sb.Append(Counting());
         }
     }
 }

@@ -5,7 +5,7 @@ namespace MiniChessLogic
 {
     public class Board
     {
-        private readonly Piece[,] pieces = new Piece[6, 5];
+        private readonly Piece[,] pieces = new Piece[5, 5];
         private readonly Dictionary<Player, Position> pawnSkipPositions = new Dictionary<Player, Position>
         {
             { Player.White, null },
@@ -46,21 +46,21 @@ namespace MiniChessLogic
             this[0, 3] = new Queen(Player.Black);
             this[0, 4] = new King(Player.Black);
 
-            this[5, 0] = new Rook(Player.White);
-            this[5, 1] = new Knight(Player.White);
-            this[5, 2] = new Bishop(Player.White);
-            this[5, 3] = new Queen(Player.White);
-            this[5, 4] = new King(Player.White);
+            this[4, 0] = new Rook(Player.White);
+            this[4, 1] = new Knight(Player.White);
+            this[4, 2] = new Bishop(Player.White);
+            this[4, 3] = new Queen(Player.White);
+            this[4, 4] = new King(Player.White);
 
             for (int c = 0; c < 5; c++)
             {
                 this[1, c] = new Pawn(Player.Black);
-                this[4, c] = new Pawn(Player.White);
+                this[3, c] = new Pawn(Player.White);
             }
         }
         public static bool IsInside(Position pos)
         {
-            return pos.Row >= 0 && pos.Row < 6 && pos.Column >= 0 && pos.Column < 5;
+            return pos.Row >= 0 && pos.Row < 5 && pos.Column >= 0 && pos.Column < 5;
         }
         public bool IsEmpty(Position pos)
         {
@@ -68,7 +68,7 @@ namespace MiniChessLogic
         }
         public IEnumerable<Position> PiecePositions()
         {
-            for (int r = 0; r < 6; r++)
+            for (int r = 0; r < 5; r++)
             {
                 for (int c = 0; c < 5; c++)
                 {
@@ -186,7 +186,7 @@ namespace MiniChessLogic
         {
             return player switch
             {
-                Player.White => IsUnmovedKingAndRook(new Position(5, 4), new Position(5, 0)),
+                Player.White => IsUnmovedKingAndRook(new Position(4, 4), new Position(4, 0)),
                 Player.Black => IsUnmovedKingAndRook(new Position(0, 4), new Position(0, 0)),
                 _ => false
 

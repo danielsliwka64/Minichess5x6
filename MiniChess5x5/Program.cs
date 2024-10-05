@@ -1,6 +1,6 @@
-using MiniChess5x6.Components;
+using MiniChess5x5.Components;
 
-namespace MiniChess5x6
+namespace MiniChess5x5
 {
     public class Program
     {
