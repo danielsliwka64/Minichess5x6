@@ -2,6 +2,7 @@
 @using MiniChessLogic.Moves
 @using MiniChessLogic
 @using System.Drawing
+@using StockFishCommunication
 
 
 @rendermode InteractiveServer
@@ -9,6 +10,7 @@
 
 <div class="mainPageContent">
     <h2>State String in FEN notation: {@stateStringFEN}</h2>
+    <h2>Best move to play: {@bestMoveToPlay}</h2>
    <div class="boardAndGameOver">
     
         <div class="BoardGrid">
@@ -57,6 +59,8 @@
     private Result result;
     private Piece activePiece = null;
     private Position selectedPos = null;
+    private string bestMoveToPlay = null;
+
     private readonly Dictionary<Position, Move> moveCache = new Dictionary<Position, Move>();
     private readonly bool[,] highlights = new bool[5, 5];
 
@@ -64,7 +68,8 @@
     {
         gameState = new GameState(Player.White, Board.Initial());
         gameOver = false;
-        stateStringFEN = gameState.stateString;
+
+        CheckTheBestMove();
     }
 
     private void OnFromPositionSelected(Position pos)
@@ -87,9 +92,11 @@
         }
     }
     private void HandleMove(Move move)
-    {   
+    {
         gameState.MakeMove(move);
-        stateStringFEN = gameState.stateString;
+
+        CheckTheBestMove();
+
         if (gameState.IsGameOver())
         {
             ShowGameOver();
@@ -179,6 +186,14 @@
             Player.Black => "BLACK",
             _ => ""
         };
+    }
+    private void CheckTheBestMove()
+    {
+        stateStringFEN = gameState.stateString;
+
+        StockFishService.examplePosition = stateStringFEN;
+        StockFishService.OnInitializedAsync();
+        bestMoveToPlay = StockFishService.bestMove;
     }
 }
 

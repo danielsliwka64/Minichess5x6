@@ -24,6 +24,7 @@ namespace MiniChessLogic
             Board = board;
             stateString = new StateString(CurrentPlayer, board).ToString();
             stateHistory[stateString] = 1;
+            StateString.countAllMoves = 1;
         }
         public IEnumerable<Move> LegalMoveForPiece(Position pos)
         {
@@ -49,6 +50,14 @@ namespace MiniChessLogic
             {
                 noCaptureOrPawnMoves++;
             }
+            
+            
+            StateString.partialMovements = noCaptureOrPawnMoves;
+            if(CurrentPlayer == Player.Black)
+            {
+                StateString.countAllMoves++;
+            } 
+
             CurrentPlayer = CurrentPlayer.Opponent();
             UpdateStateString();
             CheckForGameOver();

@@ -54,7 +54,7 @@ namespace StockFishCommunication
         public string GetBestMove(string fen)
         {
             SendCommand($"position fen {fen}");
-            SendCommand("go movetime 1000");  // Time limit 1 s
+            SendCommand("go movetime 200");  // Time limit 0.2 s
             string output;
             while ((output = ReadOutput()) != null)
             {

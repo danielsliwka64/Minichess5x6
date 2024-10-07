@@ -1,10 +1,13 @@
 ﻿namespace StockFishCommunication
 {
-    public class Program
+    public class StockFishService
     {
-        public static string bestMove;
-        public static string examplePosition = "rnbqk/ppppp/5/PPPPP/RNBQK w Qq - 0 1";
+        public static string bestMove { get; set; }
+        public static string examplePosition { get; set; }
+
+        //"rnbqk/ppppp/5/PPPPP/RNBQK w Qq - 0 1";
         //r1bqkb1r/pppppppp/2n2n2/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3"; // Przykładowa pozycja 
+
         public static async Task OnInitializedAsync()
         {
             using (var stockfish = new StockFishEngine())

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MiniChessLogic\MiniChessLogic.csproj" />
+    <ProjectReference Include="..\StockFishCommunication\StockFishCommunication.csproj" />
   </ItemGroup>
 
   <ItemGroup>

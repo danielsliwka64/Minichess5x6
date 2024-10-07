@@ -10,6 +10,9 @@ namespace MiniChessLogic
     public class StateString
     {
         private readonly StringBuilder sb = new StringBuilder();
+        public static int partialMovements {  get; set; }
+        public static int countAllMoves {  get; set; }
+
         public StateString(Player currentPlayer, Board board)
         {
             // Add piece placement data
@@ -24,6 +27,9 @@ namespace MiniChessLogic
             //Add en passant data
             AddEnPassant(board, currentPlayer);
             sb.Append(' ');
+            sb.Append(partialMovements);
+            sb.Append(' ');
+            sb.Append(countAllMoves);
 
 
         }
@@ -152,11 +158,6 @@ namespace MiniChessLogic
             sb.Append(file);
             sb.Append(rank);
 
-        }
-
-        private void AddCounting()
-        {
-            sb.Append(Counting());
         }
     }
 }
